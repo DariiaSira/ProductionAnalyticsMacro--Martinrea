@@ -32,3 +32,12 @@ Data visualization through charts and tables makes analysis results accessible a
 
 These improvements help avoid errors, speed up analysis, and create conditions for optimizing production processes, positively impacting overall system efficiency.
 
+## Examples
+
+![image](https://github.com/user-attachments/assets/726ba04c-c0ea-490d-b18f-ef13f6e41168)
+![image](https://github.com/user-attachments/assets/937e175c-c962-40e4-b651-c7b6c094fd74)
+![image](https://github.com/user-attachments/assets/4ba6d341-a2bc-465b-9ea8-6fbd26b037de)
+
+
+
+
