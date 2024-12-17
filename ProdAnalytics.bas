@@ -231,7 +231,7 @@ Sub CreatePivotTable(ws As Worksheet)
     ' Add the corresponding formulas for E3 to E5
     ws.Range("AC3").Formula = "=SUMIF(Y2:Y" & lastRowP & ", ""<=11"", Z2:Z" & lastRowP & ")"
     ws.Range("AC4").Formula = "=SUMIFS(Z2:Z" & lastRowP & ", Y2:Y" & lastRowP & ", "">11"", Y2:Y" & lastRowP & ", ""<=60"")"
-    ws.Range("AC5").Formula = "=SUMIF(Y2:V" & lastRowP & ", "">60"", Z2:Z" & lastRowP & ")"
+    ws.Range("AC5").Formula = "=SUMIF(Y2:Y" & lastRowP & ", "">60"", Z2:Z" & lastRowP & ")"
      
     ws.Range("AC11").Formula = "=COUNTIF('" & ws.Name & "'!R3:R" & lastRowT & ", ""NOK"")"
     ws.Range("AC12").Formula = "=COUNTIF('" & ws.Name & "'!S3:S" & lastRowT & ", ""NOK"")"
@@ -530,3 +530,5 @@ Sub GraphCreate(ws As Worksheet)
     End With
 
 End Sub
+
+
