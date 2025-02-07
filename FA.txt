@@ -6,36 +6,36 @@ Sub FullAnalisisMacro()
     Dim newSheet As Worksheet
     Dim csvFullPath As String
     
-    ActiveSheet.Name = "Analitics"
+    ActiveSheet.Name = "Analytics"
     Dim ws As Worksheet
-    Set ws = ThisWorkbook.Sheets("Analitics")
+    Set ws = ThisWorkbook.Sheets("Analytics")
     
-    ws.Range("S6").Value = "Rules"
-    ws.Range("S7").Value = "Uhol"
-    ws.Range("S8").Value = "Priemer"
-    ws.Range("S10").Value = "Vzdialenost"
+    ws.Range("U6").Value = "Rules"
+    ws.Range("U7").Value = "Uhol"
+    ws.Range("U8").Value = "Priemer"
+    ws.Range("U10").Value = "Vzdialenost"
     
-    ws.Range("T6").Value = "Min"
-    ws.Range("T7").Value = 113
-    ws.Range("T8").Value = 6.92
-    ws.Range("T9").Value = 8.22
-    ws.Range("T10").Value = 2.2
+    ws.Range("V6").Value = "Min"
+    ws.Range("V7").Value = 113
+    ws.Range("V8").Value = 6.92
+    ws.Range("V9").Value = 8.22
+    ws.Range("V10").Value = 2.2
     
-    ws.Range("U6").Value = "Max"
-    ws.Range("U7").Value = 117
-    ws.Range("U8").Value = 7.5
-    ws.Range("U9").Value = 8.8
-    ws.Range("U10").Value = 2.8
+    ws.Range("W6").Value = "Max"
+    ws.Range("W7").Value = 117
+    ws.Range("W8").Value = 7.5
+    ws.Range("W9").Value = 8.8
+    ws.Range("W10").Value = 2.8
     
-    ws.Range("V6").Value = "Alt"
-    ws.Range("V7").Value = 0
-    ws.Range("V10").Value = 0
+    ws.Range("X6").Value = "Alt"
+    ws.Range("X7").Value = 0
+    ws.Range("X10").Value = 0
     
-    ws.Range("S6:V10").Font.Bold = True
+    ws.Range("U6:X10").Font.Bold = True
     
     ' Add a button for "Color Rule" on cells O12:Q12
     Dim btn As Button
-    Set btn = ws.Buttons.Add(Left:=ws.Range("S12").Left, Top:=ws.Range("S12").Top, Width:=ws.Range("S12:V12").Width, Height:=ws.Range("S12:V12").Height)
+    Set btn = ws.Buttons.Add(Left:=ws.Range("U12").Left, Top:=ws.Range("U12").Top, Width:=ws.Range("U12:X12").Width, Height:=ws.Range("S12:V12").Height)
     btn.Caption = "Color Rule"
     btn.OnAction = "ClearAllColors"
     
@@ -93,7 +93,7 @@ Sub FullAnalisisMacro()
 
     ' MsgBox "All CSV files have been processed."
     
-    MainAnalitics newSheet
+    MainAnalytics newSheet
     
 End Sub
 
@@ -140,7 +140,10 @@ Sub UpdateZmenaTable(ws As Worksheet)
     lastRow = lastRow + 1
 
     ' Apply the formula in column B from B3 to the last row
-    ws.Range("B2:B" & lastRow + 1).Formula = "=IFERROR(ROUND((A2-A1)*86400, 0), 0)"
+    If Not IsEmpty(ws.Range("A2")) And Not IsEmpty(ws.Range("A1")) Then
+        ws.Range("B2:B" & lastRow + 1).Formula = "=IFERROR(ROUND((A2-A1)*86400, 0), 0)"
+    End If
+    ' ws.Range("B2:B" & lastRow + 1).Formula = "=IFERROR(ROUND((A2-A1)*86400, 0), 0)"
     
     ' Format column B as Text
     ws.Columns("B").NumberFormat = "@"
@@ -154,12 +157,12 @@ Sub UpdateZmenaTable(ws As Worksheet)
     ws.Range("W1").Value = "Vzdielanost B"
     
     ' Apply the formula to find state
-    ws.Range("R3:R" & lastRow).Formula2 = "=IF(OR(AND(D3=Analitics!$V$7, E3=Analitics!$V$7), SUM((D3:E3<Analitics!$T$7)+(D3:E3>Analitics!$U$7))<>COLUMNS(D3:E3)), ""OK"", ""NOK"")"
-    ws.Range("S3:S" & lastRow).Formula2 = "=IF(SUM((F3:G3<Analitics!$T$7)+(F3:G3>Analitics!$U$7))<>COLUMNS(F3:G3), ""OK"", ""NOK"")"
-    ws.Range("T3:T" & lastRow).Formula2 = "=IF(AND(SUM((H3:I3<Analitics!$T$8)+(H3:I3>Analitics!$U$8))=COLUMNS(H3:I3), SUM((H3:I3<Analitics!$T$9)+(H3:I3>Analitics!$U$9))=COLUMNS(H3:I3)), ""NOK"", ""OK"")"
-    ws.Range("U3:U" & lastRow).Formula2 = "=IF(AND(SUM((J3:K3<Analitics!$T$8)+(J3:K3>Analitics!$U$8))=COLUMNS(J3:K3), SUM((J3:K3<Analitics!$T$9)+(J3:K3>Analitics!$U$9))=COLUMNS(J3:K3)), ""NOK"", ""OK"")"
-    ws.Range("V3:V" & lastRow).Formula2 = "=IF(OR(AND(L3=Analitics!$V$10, M3=Analitics!$V$10), SUM((L3:M3<Analitics!$T$10)+(L3:M3>Analitics!$U$10))<>COLUMNS(L3:M3)), ""OK"", ""NOK"")"
-    ws.Range("W3:W" & lastRow).Formula2 = "=IF(SUM((N3:O3<Analitics!$T$10)+(N3:O3>Analitics!$U$10))<>COLUMNS(N3:O3), ""OK"", ""NOK"")"
+    ws.Range("R3:R" & lastRow).Formula2 = "=IF(OR(AND(D3=Analytics!$V$7, E3=Analytics!$V$7), SUM((D3:E3<Analytics!$T$7)+(D3:E3>Analytics!$U$7))<>COLUMNS(D3:E3)), ""OK"", ""NOK"")"
+    ws.Range("S3:S" & lastRow).Formula2 = "=IF(SUM((F3:G3<Analytics!$T$7)+(F3:G3>Analytics!$U$7))<>COLUMNS(F3:G3), ""OK"", ""NOK"")"
+    ws.Range("T3:T" & lastRow).Formula2 = "=IF(AND(SUM((H3:I3<Analytics!$T$8)+(H3:I3>Analytics!$U$8))=COLUMNS(H3:I3), SUM((H3:I3<Analytics!$T$9)+(H3:I3>Analytics!$U$9))=COLUMNS(H3:I3)), ""NOK"", ""OK"")"
+    ws.Range("U3:U" & lastRow).Formula2 = "=IF(AND(SUM((J3:K3<Analytics!$T$8)+(J3:K3>Analytics!$U$8))=COLUMNS(J3:K3), SUM((J3:K3<Analytics!$T$9)+(J3:K3>Analytics!$U$9))=COLUMNS(J3:K3)), ""NOK"", ""OK"")"
+    ws.Range("V3:V" & lastRow).Formula2 = "=IF(OR(AND(L3=Analytics!$V$10, M3=Analytics!$V$10), SUM((L3:M3<Analytics!$T$10)+(L3:M3>Analytics!$U$10))<>COLUMNS(L3:M3)), ""OK"", ""NOK"")"
+    ws.Range("W3:W" & lastRow).Formula2 = "=IF(SUM((N3:O3<Analytics!$T$10)+(N3:O3>Analytics!$U$10))<>COLUMNS(N3:O3), ""OK"", ""NOK"")"
 
 End Sub
 
@@ -217,6 +220,8 @@ Sub CreatePivotTable(ws As Worksheet)
     ws.Range("AB14").Value = "NOK State Priemer B"
     ws.Range("AB15").Value = "NOK State Vzdielanost A"
     ws.Range("AB16").Value = "NOK State Vzdielanost B"
+    ws.Range("AB17").Value = "NOK State 3D A"
+    ws.Range("AB18").Value = "NOK State 3D B"
     
     
     ' Apply bold formatting to headers
@@ -228,7 +233,7 @@ Sub CreatePivotTable(ws As Worksheet)
     ' Add the corresponding formulas for E3 to E5
     ws.Range("AC3").Formula = "=SUMIF(Y2:Y" & lastRowP & ", ""<=11"", Z2:Z" & lastRowP & ")"
     ws.Range("AC4").Formula = "=SUMIFS(Z2:Z" & lastRowP & ", Y2:Y" & lastRowP & ", "">11"", Y2:Y" & lastRowP & ", ""<=60"")"
-    ws.Range("AC5").Formula = "=SUMIF(Y2:V" & lastRowP & ", "">60"", Z2:Z" & lastRowP & ")"
+    ws.Range("AC5").Formula = "=SUMIF(Y2:Y" & lastRowP & ", "">60"", Z2:Z" & lastRowP & ")"
      
     ws.Range("AC11").Formula = "=COUNTIF('" & ws.Name & "'!R3:R" & lastRowT & ", ""NOK"")"
     ws.Range("AC12").Formula = "=COUNTIF('" & ws.Name & "'!S3:S" & lastRowT & ", ""NOK"")"
@@ -236,8 +241,10 @@ Sub CreatePivotTable(ws As Worksheet)
     ws.Range("AC14").Formula = "=COUNTIF('" & ws.Name & "'!U3:U" & lastRowT & ", ""NOK"")"
     ws.Range("AC15").Formula = "=COUNTIF('" & ws.Name & "'!V3:V" & lastRowT & ", ""NOK"")"
     ws.Range("AC16").Formula = "=COUNTIF('" & ws.Name & "'!W3:W" & lastRowT & ", ""NOK"")"
+    ws.Range("AC17").Formula = "=COUNTIF('" & ws.Name & "'!P3:P" & lastRowT & ", ""NOK"")"
+    ws.Range("AC18").Formula = "=COUNTIF('" & ws.Name & "'!Q3:Q" & lastRowT & ", ""NOK"")"
     
-    ws.Range("AC10").Formula = "=COUNTIF('" & ws.Name & "'!P3:P" & lastRowT & ", ""NOK"") + COUNTIF('" & ws.Name & "'!Q3:Q" & lastRowT & ", ""NOK"") + AC11 + AC12 + AC13 + AC14 + AC15 + AC16"
+    ws.Range("AC10").Formula = "=AC11 + AC12 + AC13 + AC14 + AC15 + AC16 + AC17 + AC18"
     ws.Range("AC9").Formula = "=ROWS('" & ws.Name & "'!A3:A" & lastRowT & ")-AC10"
     
     ' Auto-fit the columns for better visibility
@@ -256,9 +263,9 @@ Sub ColorOutOfRange(ws As Worksheet)
     ' Define the range for D3:G to the last row
     Set rngD_G = ws.Range("D3:G" & lastRow)
     
-    lowerBoundD_G = ThisWorkbook.Sheets("Analitics").Range("T7").Value
-    upperBoundD_G = ThisWorkbook.Sheets("Analitics").Range("U7").Value
-    altBoundD_G = ThisWorkbook.Sheets("Analitics").Range("V7").Value
+    lowerBoundD_G = ThisWorkbook.Sheets("Analytics").Range("T7").Value
+    upperBoundD_G = ThisWorkbook.Sheets("Analytics").Range("U7").Value
+    altBoundD_G = ThisWorkbook.Sheets("Analytics").Range("V7").Value
     
     ' Loop through each cell in D3:G
     For Each cell In rngD_G
@@ -272,10 +279,10 @@ Sub ColorOutOfRange(ws As Worksheet)
     ' Define the range for H3:K to the last row
     Set rngH_K = ws.Range("H3:K" & lastRow)
     
-    lowerBoundAH_K = ThisWorkbook.Sheets("Analitics").Range("T8").Value
-    upperBoundAH_K = ThisWorkbook.Sheets("Analitics").Range("U8").Value
-    lowerBoundBH_K = ThisWorkbook.Sheets("Analitics").Range("T9").Value
-    upperBoundBH_K = ThisWorkbook.Sheets("Analitics").Range("U9").Value
+    lowerBoundAH_K = ThisWorkbook.Sheets("Analytics").Range("T8").Value
+    upperBoundAH_K = ThisWorkbook.Sheets("Analytics").Range("U8").Value
+    lowerBoundBH_K = ThisWorkbook.Sheets("Analytics").Range("T9").Value
+    upperBoundBH_K = ThisWorkbook.Sheets("Analytics").Range("U9").Value
     
     ' Loop through each cell in H3:K
     For Each cell In rngH_K
@@ -292,9 +299,9 @@ Sub ColorOutOfRange(ws As Worksheet)
     ' Define the range for L3:O to the last row
     Set rngL_O = ws.Range("L3:O" & lastRow)
     
-    lowerBoundL_O = ThisWorkbook.Sheets("Analitics").Range("T10").Value
-    upperBoundL_O = ThisWorkbook.Sheets("Analitics").Range("U10").Value
-    altBoundL_O = ThisWorkbook.Sheets("Analitics").Range("V10").Value
+    lowerBoundL_O = ThisWorkbook.Sheets("Analytics").Range("T10").Value
+    upperBoundL_O = ThisWorkbook.Sheets("Analytics").Range("U10").Value
+    altBoundL_O = ThisWorkbook.Sheets("Analytics").Range("V10").Value
     
     ' Loop through each cell in L3:O
     For Each cell In rngL_O
@@ -321,7 +328,7 @@ Sub ColorOutOfRange(ws As Worksheet)
 
 End Sub
 
-Sub MainAnalitics(ws As Worksheet)
+Sub MainAnalytics(ws As Worksheet)
     Dim i As Integer
     
     ' Activate the first sheet before the listing
@@ -334,25 +341,29 @@ Sub MainAnalitics(ws As Worksheet)
         .Range("C1").Value = "Short Down Time 11-60s"
         .Range("D1").Value = "Long Down Time 60s and more"
         .Range("E1").Value = "Short and Long Down Time"
+        
         .Range("F1").Value = "NOK State Uhol A"
         .Range("G1").Value = "NOK State Uhol B"
         .Range("H1").Value = "NOK State Priemer A"
         .Range("I1").Value = "NOK State Priemer B"
         .Range("J1").Value = "NOK State Vzdielanost A"
         .Range("K1").Value = "NOK State Vzdielanost B"
-        .Range("L1").Value = "OK State"
-        .Range("M1").Value = "NOK State"
-        .Range("O1").Value = "All Produced"
-        .Range("P1").Value = "NonProduced"
-        .Range("Q1").Value = "Efficienty"
-        .Range("S2").Value = "Cielovy CT"
-        .Range("S3").Value = "Target"
-        .Range("T2").Value = "10"
-        .Range("S16").Value = "OK State Sum"
-        .Range("S17").Value = "NOK State Sum"
-        .Range("T3").Value = "=60/T2*60*8"
-        .Range("A1:Q1").Font.Bold = True
-        .Range("S2:V10").Font.Bold = True
+        .Range("L1").Value = "NOK State 3D A"
+        .Range("M1").Value = "NOK State 3D B"
+        
+        .Range("N1").Value = "OK State"
+        .Range("O1").Value = "NOK State"
+        .Range("Q1").Value = "All Produced"
+        .Range("R1").Value = "NonProduced"
+        .Range("S1").Value = "Efficienty"
+        .Range("U2").Value = "Cielovy CT"
+        .Range("U3").Value = "Target"
+        .Range("V2").Value = "10"
+        .Range("U16").Value = "OK State Sum"
+        .Range("U17").Value = "NOK State Sum"
+        .Range("V3").Value = "=60/V2*60*8"
+        .Range("A1:S1").Font.Bold = True
+        .Range("U2:X17").Font.Bold = True
     End With
     
     i = 2 ' Start writing in cells A2 and B2
@@ -368,9 +379,9 @@ Sub MainAnalitics(ws As Worksheet)
             Address:="", SubAddress:="'" & ws.Name & "'!A1", TextToDisplay:=ws.Name
             
             ' Link cells dynamically
-            ThisWorkbook.ActiveSheet.Cells(i, 2).Formula = "='" & ws.Name & "'!Z3"
-            ThisWorkbook.ActiveSheet.Cells(i, 3).Formula = "='" & ws.Name & "'!Z4"
-            ThisWorkbook.ActiveSheet.Cells(i, 4).Formula = "='" & ws.Name & "'!Z5"
+            ThisWorkbook.ActiveSheet.Cells(i, 2).Formula = "='" & ws.Name & "'!AC3"
+            ThisWorkbook.ActiveSheet.Cells(i, 3).Formula = "='" & ws.Name & "'!AC4"
+            ThisWorkbook.ActiveSheet.Cells(i, 4).Formula = "='" & ws.Name & "'!AC5"
             ThisWorkbook.ActiveSheet.Cells(i, 5).Formula = "=C" & i & "+D" & i
             
             ThisWorkbook.ActiveSheet.Cells(i, 6).Formula = "='" & ws.Name & "'!AC11"
@@ -379,19 +390,22 @@ Sub MainAnalitics(ws As Worksheet)
             ThisWorkbook.ActiveSheet.Cells(i, 9).Formula = "='" & ws.Name & "'!AC14"
             ThisWorkbook.ActiveSheet.Cells(i, 10).Formula = "='" & ws.Name & "'!AC15"
             ThisWorkbook.ActiveSheet.Cells(i, 11).Formula = "='" & ws.Name & "'!AC16"
-            ThisWorkbook.ActiveSheet.Cells(i, 12).Formula = "='" & ws.Name & "'!AC9"
-            ThisWorkbook.ActiveSheet.Cells(i, 13).Formula = "='" & ws.Name & "'!AC10"
+            ThisWorkbook.ActiveSheet.Cells(i, 12).Formula = "='" & ws.Name & "'!AC17"
+            ThisWorkbook.ActiveSheet.Cells(i, 13).Formula = "='" & ws.Name & "'!AC18"
             
-            ThisWorkbook.ActiveSheet.Cells(i, 15).Formula = "=L" & i & "+M" & i
-            ThisWorkbook.ActiveSheet.Cells(i, 16).Formula = "=$T$3" & "-O" & i
-            ThisWorkbook.ActiveSheet.Cells(i, 17).Formula = "=O" & i & "/$T$3*100"
+            ThisWorkbook.ActiveSheet.Cells(i, 14).Formula = "='" & ws.Name & "'!AC9"
+            ThisWorkbook.ActiveSheet.Cells(i, 15).Formula = "='" & ws.Name & "'!AC10"
+            
+            ThisWorkbook.ActiveSheet.Cells(i, 17).Formula = "=N" & i & "+O" & i
+            ThisWorkbook.ActiveSheet.Cells(i, 18).Formula = "=$V$3" & "-Q" & i
+            ThisWorkbook.ActiveSheet.Cells(i, 19).Formula = "=Q" & i & "/$V$3*100"
         
             i = i + 1
         End If
     Next ws
     
     ' AutoFit the columns to adjust their width
-    ThisWorkbook.ActiveSheet.Columns("A:V").AutoFit
+    ThisWorkbook.ActiveSheet.Columns("A:X").AutoFit
     
     GraphCreate ThisWorkbook.ActiveSheet
     
@@ -437,7 +451,7 @@ Sub GraphCreate(ws As Worksheet)
     End With
     
     Set efficientyRange = Union(ThisWorkbook.ActiveSheet.Range("A1:A" & lastRow), _
-                                ThisWorkbook.ActiveSheet.Range("Q1:Q" & lastRow))
+                                ThisWorkbook.ActiveSheet.Range("S1:S" & lastRow))
         
     Set chartObj = ThisWorkbook.ActiveSheet.ChartObjects.Add(Left:=400, Width:=700, Top:=400, Height:=300)
         
@@ -454,19 +468,19 @@ Sub GraphCreate(ws As Worksheet)
     
     
     ' Calculate the sum of ranges F and G from the second row to the last row
-    ThisWorkbook.Sheets("Analitics").Range("T16").Value = "=SUM(L2:L" & lastRow & ")"
-    ThisWorkbook.Sheets("Analitics").Range("T17").Value = "=SUM(M2:M" & lastRow & ")"
+    ThisWorkbook.Sheets("Analytics").Range("V16").Value = "=SUM(N2:N" & lastRow & ")"
+    ThisWorkbook.Sheets("Analytics").Range("V17").Value = "=SUM(O2:O" & lastRow & ")"
 
     ' Create the pie chart
     Set pieChartObj = ThisWorkbook.ActiveSheet.ChartObjects.Add(Left:=400, Width:=300, Top:=750, Height:=300)
 
     With pieChartObj.Chart
         .ChartType = xlPie
-        .SetSourceData Source:=ThisWorkbook.Sheets("Analitics").Range("P16:P17")
+        .SetSourceData Source:=ThisWorkbook.Sheets("Analytics").Range("U16:U17")
         .SeriesCollection.NewSeries
         .SeriesCollection(1).Name = "Sum of Ranges"
         .SeriesCollection(1).XValues = Array("OK", "NOK")
-        .SeriesCollection(1).Values = "=Analitics!T16:T17"
+        .SeriesCollection(1).Values = "=Analytics!V16:V17"
         .SeriesCollection(1).ApplyDataLabels xlDataLabelsShowPercent
         .HasTitle = True
         .ChartTitle.Text = "OK vs NOK State"
@@ -480,10 +494,10 @@ Sub GraphCreate(ws As Worksheet)
     
 
     ' Set the source data for the chart
-    Set analiticsRange = Union(ThisWorkbook.ActiveSheet.Range("A2:A" & lastRow), _
-                                ThisWorkbook.ActiveSheet.Range("L2:L" & lastRow), _
-                                ThisWorkbook.ActiveSheet.Range("M2:M" & lastRow), _
-                                ThisWorkbook.ActiveSheet.Range("P2:P" & lastRow))
+    Set AnalyticsRange = Union(ThisWorkbook.ActiveSheet.Range("A2:A" & lastRow), _
+                                ThisWorkbook.ActiveSheet.Range("N2:N" & lastRow), _
+                                ThisWorkbook.ActiveSheet.Range("O2:O" & lastRow), _
+                                ThisWorkbook.ActiveSheet.Range("R2:R" & lastRow))
     ' Add a new chart object to the worksheet
     Set chartObj = ThisWorkbook.ActiveSheet.ChartObjects.Add(Left:=400, Width:=1300, Top:=50, Height:=500)
     
@@ -500,7 +514,7 @@ Sub GraphCreate(ws As Worksheet)
         .SeriesCollection.NewSeries
         .SeriesCollection(1).Name = "OK"
         .SeriesCollection(1).XValues = ThisWorkbook.ActiveSheet.Range("A2:A" & lastRow)
-        .SeriesCollection(1).Values = ThisWorkbook.ActiveSheet.Range("L2:L" & lastRow)
+        .SeriesCollection(1).Values = ThisWorkbook.ActiveSheet.Range("N2:N" & lastRow)
         .SeriesCollection(1).ChartType = xlColumnStacked
         .SeriesCollection(1).Format.Fill.ForeColor.RGB = RGB(51, 204, 51) ' Green for OK State
         .SeriesCollection(1).Format.Fill.Transparency = 0.3
@@ -508,7 +522,7 @@ Sub GraphCreate(ws As Worksheet)
         .SeriesCollection.NewSeries
         .SeriesCollection(2).Name = "NOK"
         .SeriesCollection(2).XValues = ThisWorkbook.ActiveSheet.Range("A2:A" & lastRow)
-        .SeriesCollection(2).Values = ThisWorkbook.ActiveSheet.Range("M2:M" & lastRow)
+        .SeriesCollection(2).Values = ThisWorkbook.ActiveSheet.Range("O2:O" & lastRow)
         .SeriesCollection(2).ChartType = xlColumnStacked
         .SeriesCollection(2).Format.Fill.ForeColor.RGB = RGB(255, 51, 0) ' Red for NOK State
         .SeriesCollection(2).Format.Fill.Transparency = 0.5
@@ -516,7 +530,7 @@ Sub GraphCreate(ws As Worksheet)
         .SeriesCollection.NewSeries
         .SeriesCollection(3).Name = "DIF TO TARGET"
         .SeriesCollection(3).XValues = ThisWorkbook.ActiveSheet.Range("A2:A" & lastRow)
-        .SeriesCollection(3).Values = ThisWorkbook.ActiveSheet.Range("P2:P" & lastRow)
+        .SeriesCollection(3).Values = ThisWorkbook.ActiveSheet.Range("R2:R" & lastRow)
         .SeriesCollection(3).ChartType = xlColumnStacked
         .SeriesCollection(3).Format.Fill.ForeColor.RGB = RGB(21, 96, 130) ' Blue for "Target"
         .SeriesCollection(3).Format.Fill.Transparency = 0.5
@@ -527,13 +541,3 @@ Sub GraphCreate(ws As Worksheet)
     End With
 
 End Sub
-
-
-
-
-
-
-
-
-
-
