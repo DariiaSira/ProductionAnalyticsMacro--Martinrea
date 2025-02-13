@@ -39,5 +39,9 @@ These improvements help avoid errors, speed up analysis, and create conditions f
 ![image](https://github.com/user-attachments/assets/4ba6d341-a2bc-465b-9ea8-6fbd26b037de)
 
 
+## Operational NOK Report Screens 
+![image](https://github.com/user-attachments/assets/8509062a-a4c6-4e77-b13a-669dd6d426e9)
+![image](https://github.com/user-attachments/assets/1c8c33db-8978-4068-a0af-0af80f677f72)
+
 
 
