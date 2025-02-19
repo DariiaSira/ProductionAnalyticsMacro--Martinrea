@@ -227,7 +227,7 @@ Sub CreatePivotTable(ws As Worksheet)
     ' Apply bold formatting to headers
     ws.Range("AB3:AB5").Font.Bold = True
     ws.Range("AC2").Font.Bold = True
-    ws.Range("AB9:AB16").Font.Bold = True
+    ws.Range("AB9:AB18").Font.Bold = True
     ws.Range("AC8").Font.Bold = True
 
     ' Add the corresponding formulas for E3 to E5
